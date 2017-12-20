@@ -1,0 +1,22 @@
+{
+  "name": "plastic-warriors-node",
+  "version": "1.0.0",
+  "description": "node js server for plastic warriors application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sergey Stepanenko",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergeyStepanenko/PWNode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SergeyStepanenko/PWNode/issues"
+  },
+  "homepage": "https://github.com/SergeyStepanenko/PWNode#readme",
+  "dependencies": {
+    "firebase": "^4.8.1"
+  }
+}
