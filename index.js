@@ -29,7 +29,7 @@ const fetchKidsTrackData = ({ units, keys }) => {
 				setInterval(() => {
 					console.log('fetch'); // eslint-disable-line
 					fetchKidsTrackData({ units, keys });
-				}, 30000);
+				}, 120000);
 
 			})
 			.catch((error) => {
