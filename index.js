@@ -23,6 +23,7 @@ setTimeout(() => {
         .then(response => {
             response.json().then(json => {
                 kidsTrackData.set(json.payload[0].data);
+                console.log('data submited')
             });
         })
         .catch(error => {
