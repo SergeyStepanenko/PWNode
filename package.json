@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/SergeyStepanenko/PWNode#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "firebase": "^4.8.1",
     "node-fetch": "^1.7.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.13.1"
   }
 }

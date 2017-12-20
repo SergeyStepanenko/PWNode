@@ -1,5 +1,5 @@
-console.log('server started')
-const fetch = require("node-fetch");
+console.log('server started'); // eslint-disable-line
+const axios = require('axios');
 const firebase = require('firebase');
 
 const config = {
@@ -15,18 +15,22 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 const kidsTrackData = database.ref('/kidsTrackData');
+const unitsRef = database.ref('/units');
 
-const url = 'https://www.izhforum.info/forum/izhevsk/tracker_live_map.php?id=motorola.H6ZG8MKE3ZNPBN&pin1=0ac04678341515627428372bfeff4a7f&mode=poll';
+unitsRef.on('value', (snap) => {
+	const units = snap.val();
+	const keys = Object.keys(units);
 
-// setInterval(() => {
-    fetch(url)
-        .then(response => {
-            response.json().then(json => {
-                kidsTrackData.set(json.payload[0].data);
-                console.log('data submited')
-            });
-        })
-        .catch(error => {
-            console.log(error);
-        });
-// }, 10000)
+	for (let i = 0; i < keys.length; i += 1) {
+		axios
+			.get(`${units[keys[i]].url}&mode=poll`)
+			.then((response) => {
+				const updates = {};
+				updates[keys[i]] = response.data.payload[0].data;
+				kidsTrackData.update(updates);
+			})
+			.catch((error) => {
+				console.log('error', error); // eslint-disable-line
+			});
+	}
+});
