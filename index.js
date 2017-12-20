@@ -29,4 +29,4 @@ setInterval(() => {
         .catch(error => {
             console.log(error);
         });
-}, 120000)
+}, 10000)
