@@ -25,11 +25,11 @@ const fetchKidsTrackData = ({ units, keys }) => {
 				const updates = {};
 				updates[keys[i]] = response.data.payload[0].data;
 				kidsTrackData.update(updates);
+				console.log('fetch'); // eslint-disable-line
 
-				setInterval(() => {
-					console.log('fetch'); // eslint-disable-line
-					fetchKidsTrackData({ units, keys });
-				}, 120000);
+				// setInterval(() => {
+				// 	fetchKidsTrackData({ units, keys });
+				// }, 120000);
 
 			})
 			.catch((error) => {
@@ -43,4 +43,14 @@ unitsRef.on('value', (snap) => {
 	const keys = Object.keys(units);
 
 	fetchKidsTrackData({ units, keys });
+});
+
+const configRef = database.ref('/config/counter');
+configRef.on('value', () => {
+	unitsRef.once('value').then((snap) => {
+		const units = snap.val();
+		const keys = Object.keys(units);
+
+		fetchKidsTrackData({ units, keys });
+	});
 });
