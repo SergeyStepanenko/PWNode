@@ -17,10 +17,7 @@ const database = firebase.database();
 const kidsTrackData = database.ref('/kidsTrackData');
 const unitsRef = database.ref('/units');
 
-unitsRef.on('value', (snap) => {
-	const units = snap.val();
-	const keys = Object.keys(units);
-
+const fetchKidsTrackData = ({ units, keys }) => {
 	for (let i = 0; i < keys.length; i += 1) {
 		axios
 			.get(`${units[keys[i]].url}&mode=poll`)
@@ -28,9 +25,22 @@ unitsRef.on('value', (snap) => {
 				const updates = {};
 				updates[keys[i]] = response.data.payload[0].data;
 				kidsTrackData.update(updates);
+
+				setInterval(() => {
+					console.log('fetch'); // eslint-disable-line
+					fetchKidsTrackData({ units, keys });
+				}, 30000);
+
 			})
 			.catch((error) => {
 				console.log('error', error); // eslint-disable-line
 			});
 	}
+};
+
+unitsRef.on('value', (snap) => {
+	const units = snap.val();
+	const keys = Object.keys(units);
+
+	fetchKidsTrackData({ units, keys });
 });
