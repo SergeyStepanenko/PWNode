@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/SergeyStepanenko/PWNode#readme",
   "dependencies": {
-    "firebase": "^4.8.1"
+    "firebase": "^4.8.1",
+    "node-fetch": "^1.7.3"
   }
 }
