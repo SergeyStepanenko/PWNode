@@ -18,7 +18,7 @@ const kidsTrackData = database.ref('/kidsTrackData');
 
 const url = 'https://www.izhforum.info/forum/izhevsk/tracker_live_map.php?id=motorola.H6ZG8MKE3ZNPBN&pin1=0ac04678341515627428372bfeff4a7f&mode=poll';
 
-setInterval(() => {
+// setInterval(() => {
     fetch(url)
         .then(response => {
             response.json().then(json => {
@@ -29,4 +29,4 @@ setInterval(() => {
         .catch(error => {
             console.log(error);
         });
-}, 10000)
+// }, 10000)
