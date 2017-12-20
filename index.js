@@ -28,9 +28,9 @@ const requestData = ({ CORS, url, key, ...rest }) => {
 				const error = new Error(this.statusText);
 				error.code = this.status;
 				reject({
-					...rest,
-					key,
-					url,
+					// ...rest,
+					// key,
+					// url,
 					error
 				});
 			}
