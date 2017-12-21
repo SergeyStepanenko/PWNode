@@ -26,11 +26,6 @@ const fetchKidsTrackData = ({ units, keys }) => {
 				updates[keys[i]] = response.data.payload[0].data;
 				kidsTrackData.update(updates);
 				console.log('fetch'); // eslint-disable-line
-
-				// setInterval(() => {
-				// 	fetchKidsTrackData({ units, keys });
-				// }, 120000);
-
 			})
 			.catch((error) => {
 				console.log('error', error); // eslint-disable-line
@@ -54,3 +49,12 @@ configRef.on('value', () => {
 		fetchKidsTrackData({ units, keys });
 	});
 });
+
+setInterval(() => {
+	unitsRef.once('value').then((snap) => {
+		const units = snap.val();
+		const keys = Object.keys(units);
+
+		fetchKidsTrackData({ units, keys });
+	});
+}, 120000);
